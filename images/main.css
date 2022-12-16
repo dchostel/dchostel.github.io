@@ -117,7 +117,13 @@ button,
 select {
   text-transform: none;
 }
-
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
 button[disabled],
 html input[disabled] {
   cursor: default;
@@ -126,6 +132,26 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+input {
+  line-height: normal;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
 }
 fieldset {
   border: 1px solid #c0c0c0;
@@ -1034,14 +1060,14 @@ tbody.collapse.in {
 }
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
   transform: translate(0, -25%);
   -webkit-transition: -webkit-transform 0.3s ease-out;
-  transition: -webkit-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
-  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
   transform: translate(0, 0);
 }
 .modal-open .modal {
@@ -1074,9 +1100,11 @@ tbody.collapse.in {
 }
 .modal-backdrop.fade {
   opacity: 0;
+  filter: alpha(opacity=0);
 }
 .modal-backdrop.in {
   opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 .modal-header {
   padding: 15px;
@@ -1214,7 +1242,9 @@ tbody.collapse.in {
 .embed-responsive.embed-responsive-4by3 {
   padding-bottom: 75%;
 }
-
+@-ms-viewport {
+  width: device-width;
+}
 .visible-xs,
 .visible-sm,
 .visible-md,
@@ -1731,25 +1761,30 @@ tbody.collapse.in {
 }
 .flex-col {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
   height: 100%;
 }
 .flex-row {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
 }
 .flex-item {
   -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
 }
@@ -1806,6 +1841,7 @@ p {
 }
 header.main-header {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
@@ -1813,9 +1849,11 @@ header.main-header {
   height: 60px;
   color: #fff;
   -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   position: fixed;
@@ -1833,13 +1871,16 @@ header.main-header a:hover {
 }
 header.main-header a.logo {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
 }
-header.main-header a.logo img {
+header.main-header a.logo img,
+header.main-header a.logo svg {
   height: 45px;
   width: 45px;
   margin: 0 20px;
@@ -1856,13 +1897,16 @@ header.main-header h1 {
 }
 header.main-header .main-nav {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   width: 55%;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   font-size: 15px;
@@ -1870,9 +1914,11 @@ header.main-header .main-nav {
 }
 header.main-header .main-nav .page-links {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
   width: 100%;
@@ -1890,12 +1936,15 @@ header.main-header .main-nav .book-button .nav-book {
   font-weight: 700;
   height: 60px;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   background-color: #e82aa3;
@@ -1903,7 +1952,7 @@ header.main-header .main-nav .book-button .nav-book {
   font-size: 18px;
   margin-top: -2px;
   -webkit-transition: all .15s;
-  transition: all .15s;
+          transition: all .15s;
 }
 @media screen and (max-width: 768px) {
   header.main-header .main-nav .book-button .nav-book {
@@ -1924,12 +1973,15 @@ header.main-header .main-nav .book-button .nav-book:hover {
   right: 0;
   background-color: rgba(0, 0, 0, 0.65);
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
@@ -1990,7 +2042,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
   }
 }
 .washington-monument {
-  background: url('../images/washington-monument.svg') no-repeat bottom left;
+  background: url('images/washington-monument.svg') no-repeat bottom left;
   background-size: contain;
   width: 100%;
   height: 80%;
@@ -2002,7 +2054,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
           filter: drop-shadow(3px -3px 1px rgba(0, 0, 0, 0.1));
 }
 .white-house {
-  background: url('../images/white-house.svg') no-repeat 100% 0px;
+  background: url('images/white-house.svg') no-repeat 100% 0px;
   width: 100%;
   height: 300px;
   position: absolute;
@@ -2025,7 +2077,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
           filter: drop-shadow(3px -3px 1px rgba(0, 0, 0, 0.1));
 }
 .capitol {
-  background: url('../images/capitol.svg') no-repeat 0% 100%;
+  background: url('images/capitol.svg') no-repeat 0% 100%;
   position: absolute;
   bottom: -350px;
   left: -15%;
@@ -2049,7 +2101,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
   }
 }
 .lincoln {
-  background: url('../images/lincoln.svg') no-repeat 0% 100%;
+  background: url('images/lincoln.svg') no-repeat 0% 100%;
   position: absolute;
   bottom: -125px;
   left: 45%;
@@ -2101,7 +2153,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
   position: absolute;
   left: -310px;
   top: 35%;
-  background: url('../images/cloud.svg') no-repeat top left;
+  background: url('images/cloud.svg') no-repeat top left;
   background-size: contain;
   -webkit-filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.15));
           filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.15));
@@ -2124,7 +2176,7 @@ header.main-header .main-nav .book-button .nav-book:hover {
   position: absolute;
   right: 0px;
   top: 20%;
-  background: url('../images/cloud-alt.svg') no-repeat top left;
+  background: url('images/cloud-alt.svg') no-repeat top left;
   background-size: contain;
   -webkit-filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.15));
           filter: drop-shadow(3px 3px 1px rgba(0, 0, 0, 0.15));
@@ -2285,64 +2337,22 @@ header.main-header .main-nav .book-button .nav-book:hover {
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
 }
-.book-now-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.show {
-  display: block;
-}
-.inner {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-.iframe-container {
-  position: relative;
-  padding-top: 30px;
-}
-.close {
-  color: white;
-  position: absolute;
-  top: 0px;
-  right: 30px;
-  text-transform: uppercase;
-  font-size: 13px;
-  cursor: pointer;
-  font-weight: 900;
-}
 .room-images {
   position: relative;
   width: 100%;
   height: 200px;
-  background: url('../images/rooms/10.jpg') no-repeat 50% 50%;
+  background: url('images/rooms/10.jpg') no-repeat 50% 50%;
   background-size: cover;
   color: #fff;
 }
 .room-images.dorm {
-  background-image: url('../images/rooms/16.jpg');
+  background-image: url('images/rooms/16.jpg');
 }
 .room-images.neighborhood {
-  background-image: url('../images/rooms/1.jpg');
+  background-image: url('images/rooms/1.jpg');
 }
 .room-images.facilities {
-  background-image: url('../images/rooms/2.jpg');
+  background-image: url('images/rooms/2.jpg');
 }
 a.button {
   border: 2px solid #fff;
@@ -2355,7 +2365,7 @@ a.button {
   border-radius: 3px;
   margin-top: 25px;
   -webkit-transition: all .15s;
-  transition: all .15s;
+          transition: all .15s;
   background-color: #e82aa3;
 }
 a.button:hover {
@@ -2381,12 +2391,15 @@ ul.what-we-provide {
 ul.what-we-provide li {
   padding-bottom: 40px;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
   line-height: 1.65em;
@@ -2395,12 +2408,15 @@ ul.what-we-provide li {
   min-width: 70px;
   height: 70px;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   color: #fff;
@@ -2441,7 +2457,7 @@ ul.what-we-provide li {
 .gray-bg {
   background-color: #222;
   color: #fff;
-  background: url('../images/Smithsonian_Building_NR.jpg') no-repeat 50% 50%;
+  background: url('images/Smithsonian_Building_NR.jpg') no-repeat 50% 50%;
   background-size: cover;
   position: relative;
 }
