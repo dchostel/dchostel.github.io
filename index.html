@@ -92,7 +92,7 @@
                 This is the hostel to stay in if you want to be on the hippest street in town. With bars, nightclubs, and restaurants located just stumbling feet away, the Washington International Student Center is also very close to the train and bus stations as well as many of Washington's famous landmarks. Without a doubt, this is a great location. There is a large Safeway grocery store and many fantastic restaurants located just outside the door — meters away.
             </p>
             <p>
-                <a href="https://www.reservationarea.com/str/washington-isc/en/" class="button alt">BOOK NOW</a>
+                <a href="https://www.reservationarea.com/str/washington-isc/en/" class="button alt nav-book-alt">BOOK NOW</a>
             </p>
         </div>
         <div class="col-md-7 gallery padding-lg-top">
@@ -246,6 +246,30 @@
             setDimensions();
         });
         setDimensions();
+        var bookButton = document.querySelector('.nav-book');
+        var bookButtonAlt = document.querySelector('.nav-book-alt');
+
+        var modal = document.querySelector('.book-now-modal');
+        var closeButton = document.querySelector('.close');
+        function showModal(e){
+            e.preventDefault();
+            modal.classList.add('show');
+        }
+
+        function hideModal(e){
+            e.preventDefault();
+            if(e.keyCode === 27 && modal.classList.contains('show')) {
+                modal.classList.remove('show');
+            }
+            if(this === closeButton){
+                modal.classList.remove('show');
+            }
+        }
+
+        bookButton.addEventListener('click', showModal);
+        bookButtonAlt.addEventListener('click', showModal);
+        closeButton.addEventListener('click', hideModal);
+        window.addEventListener('keyup', hideModal);
     });
 
 </script>
